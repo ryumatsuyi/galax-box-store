@@ -1,4 +1,6 @@
-<h3 style="text-align: center">Instagram</h3>
+{% unless section.settings.gallery-header == blank %}
+  <h3 class="text-center">{{ section.settings.gallery-header }}</h3>
+{% endunless %}
 <div class="grid grid--no-gutters image-bar image-bar--{{ section.settings.section_height }}">
   {% case section.blocks.size %}
     {% when 1 %}
@@ -93,8 +95,8 @@
     {
       "type": "text",
       "id": "gallery-header",
-      "label": "header"
-    }
+      "label": "gallery title"
+    },
     {
       "type": "select",
       "id": "section_height",
