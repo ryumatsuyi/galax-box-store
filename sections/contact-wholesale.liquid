@@ -35,17 +35,17 @@
 	</div>
 	<div class="grid grid--half-gutters">
 		<div class="grid__item medium-up--one-half">
-			<label for="{{ formId }}-businessName">Business Name</label>
+			<label for="{{ formId }}-businessName">{{'customisations.wholesale.business_name' | t}}</label>
 			<input type="text" id="{{ formId }}-businessName" name="contact[Business Name]">
 		</div>
 		<div class="grid__item medium-up--one-half">
-			<label for="{{ formId }}-website">Website</label>
+			<label for="{{ formId }}-website">{{'customisations.wholesale.website' | t}}</label>
 			<input type="text" id="{{ formId }}-website" name="contact[ website ]" >
 		</div>
 	</div>
 
 	{% unless section.settings.typeOfBusiness == blank %}
-		<label for="{{ formId }}-business-type">Business Type</label>
+		<label for="{{ formId }}-business-type">{{'customisations.wholesale.business_type' | t}}</label>
 		<select type="select" id="{{ formId }}-business-type" name="contact[ Business Type ]">
 			{% assign businessTypes = section.settings.typeOfBusiness | split: "," %}
 			{% for businessType in businessTypes %}
