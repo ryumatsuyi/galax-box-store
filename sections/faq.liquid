@@ -1,7 +1,27 @@
-<h2>{{ section.settings.heading }}</h2>
+<div class="faq">
 
-<h4>{{ section.settings.question }}</h4>
-<p>{{ section.settings.answer }}</p>
+    <h2>{{ section.settings.heading }}</h2>
+
+    {% for block in section.blocks %}
+        {% if block.type == "QA" %}
+            <div class="question">
+                <input type="checkbox" id="question-{{ forloop.index }}" class="question-toggle">
+                <label for="question-{{ forloop.index }}" class="question-label">
+                    {{ block.settings.question }}
+                </label>
+                <div class="answer">
+                    {{ block.settings.answer }}
+                </div>
+            </div>
+            {% comment %} <h3>{{ block.settings.question }}</h3>
+            <p>{{ block.settings.answer }}</p> {% endcomment %}
+        {% elsif block.type == "headline" %}
+            <h4>{{ block.settings.title }}</h4>
+        {% endif %}
+
+    {% endfor %}
+
+</div>
 
 {% schema %}
     {
@@ -11,16 +31,40 @@
                 "type": "text",
                 "label": "heading for faq",
                 "id": "heading"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "QA",
+                "name": "Question/Answer",
+                "settings":[
+                    {
+                        "type": "text",
+                        "label": "title",
+                        "id": "title"
+                    },
+                    {
+                        "type": "text",
+                        "label": "customer questions",
+                        "id": "question"
+                    },
+                    {
+                        "type": "richtext",
+                        "label": "answer for faq",
+                        "id": "answer"
+                    }
+                ]
             },
             {
-                "type": "text",
-                "label": "customer questions",
-                "id": "question"
-            },
-            {
-                "type": "textarea",
-                "label": "answer for faq",
-                "id": "answer"
+                "type": "headline",
+                "name": "headline",
+                "settings": [
+                    {
+                        "type": "text",
+                        "label": "headline",
+                        "id": "title"
+                    }
+                ]
             }
         ]
     }
