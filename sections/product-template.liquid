@@ -146,21 +146,21 @@
         <script>window.performance.mark('debut:product:title_visible');</script>
 
           {% unless isAffiliateProduct %}
-          <div>⭐⭐⭐⭐⭐</div>
-          <div class="product__price">
-            {% include 'product-price', variant: current_variant, show_vendor: section.settings.show_vendor %}
-          </div>
-
-          {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
-            <div class="product__policies rte" data-product-policies>
-              {%- if cart.taxes_included -%}
-                {{ 'products.product.include_taxes' | t }}
-              {%- endif -%}
-              {%- if shop.shipping_policy.body != blank -%}
-                {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-              {%- endif -%}
+            {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false %}
+            <div class="product__price">
+              {% include 'product-price', variant: current_variant, show_vendor: section.settings.show_vendor %}
             </div>
-          {%- endif -%}
+
+            {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
+              <div class="product__policies rte" data-product-policies>
+                {%- if cart.taxes_included -%}
+                  {{ 'products.product.include_taxes' | t }}
+                {%- endif -%}
+                {%- if shop.shipping_policy.body != blank -%}
+                  {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
           {% endunless %}
 
           {% capture "form_classes" -%}
@@ -288,14 +288,39 @@
         >
         </div>
 
-        <div class="product-single__description rte">
-          {{ product.description }}
+        <div class="container">
+          <div class="selector">
+            <div class="tab tab-active">
+              {{ 'customisations.product_page_tabs.description_tab' | t }}
+            </div>
+            {% if product.metafields.description.details %}
+              <div class="tab">
+                {{ 'customisations.product_page_tabs.details_tab' | t }}
+              </div>
+            {% endif %}
+            <div class="tab">
+              {{ 'customisations.product_page_tabs.shipping_tab' | t }}
+            </div>
+          </div>
+          <div class="content">
+            <div id="Description" class="content-body show-active">
+              {{ product.description }}
+            </div>
+            {% if product.metafields.description.details %}
+              <div id="Details" class="content-body">
+                {{ product.metafields.description.details }}
+              </div>
+            {% endif %}
+            <div id="Shipping" class="content-body">
+              {{ 'customisations.product_page_tabs.shipping_tab_info' | t }}
+            </div>
+          </div>
         </div>
-
         {% if section.settings.show_share_buttons %}
           {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product.featured_media %}
         {% endif %}
     </div>
+    {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: false %}
   </div>
 </div>
 

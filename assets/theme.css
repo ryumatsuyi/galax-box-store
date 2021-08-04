@@ -6998,6 +6998,8 @@ hr {
   margin-bottom: 0; }
 
 
+/* custom styles */
+
   .faq
   {
   border-radius: 8px;
@@ -7052,3 +7054,48 @@ color:#0c007a;
   max-height: 100vh;
   padding:1em;
   }
+
+
+.jdgm-histogram__bar-content {
+  background: blue !important;
+}
+
+/* product page tabs */
+
+.container {
+  width: 100%;
+  height: 50%;
+  margin: 0 auto;
+}
+.selector {
+  display: flex;
+  border-bottom: 1px solid grey;
+}
+.tab {
+  padding: 10px;
+}
+.tab:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.content {
+  padding: 10px;
+}
+.content-body {
+  display: none;
+}
+.show-active {
+  display: block;
+  animation: fade 1s;
+}
+.tab-active {
+  text-decoration: underline;
+}
+@keyframes fade {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity:1;
+  }
+}
