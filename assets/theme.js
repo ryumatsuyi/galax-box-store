@@ -731,7 +731,9 @@ slate.Variants = (function() {
      */
     _getVariantFromOptions: function() {
       var selectedValues = this._getCurrentOptions();
+      // console.log(selectedValues, "selected values");
       var variants = this.product.variants;
+      // console.log(variants, "variants");
 
       var found = variants.find(function(variant) {
         return selectedValues.every(function(values) {
@@ -739,6 +741,7 @@ slate.Variants = (function() {
         });
       });
 
+      // console.log(found, "found");
       return found;
     },
 
@@ -762,6 +765,7 @@ slate.Variants = (function() {
         return;
       }
 
+      this._updateProductDetails(variant);
       this._updateMasterSelect(variant);
       this._updateImages(variant);
       this._updatePrice(variant);
@@ -880,6 +884,22 @@ slate.Variants = (function() {
 
       if (!masterSelect) return;
       masterSelect.value = variant.id;
+    },
+
+    _updateProductDetails: function(variant) {
+      // if plug type is EU 
+      if (variant.option2 == 'EU') {
+        // hide US chart
+        //grab details div
+        usDetails.style.display = "none";
+        euDetails.style.display = "table";
+      //if plug type is US)
+      } else if (variant.option2 == 'US') {
+        // hide EU chart
+        euDetails.style.display = "none";
+        usDetails.style.display = "table";
+      }
+      
     }
   });
 
@@ -8107,6 +8127,8 @@ theme.Product = (function() {
         product: this.productSingleObject
       };
 
+      console.log(options.product, "product");
+
       this.variants = new slate.Variants(options);
       if (this.storeAvailability && this.variants.currentVariant.available) {
         this.storeAvailability.updateContent(this.variants.currentVariant.id);
@@ -9720,3 +9742,8 @@ for (var tab of tabs) {
     setActiveTab(e.currentTarget);
   })
 }
+
+let usDetails = document.getElementById('Details').children[0];
+let euDetails = document.getElementById('Details').children[1];
+
+euDetails.style.display = "none";

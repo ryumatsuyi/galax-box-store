@@ -293,7 +293,7 @@
             <div class="tab tab-active">
               {{ 'customisations.product_page_tabs.description_tab' | t }}
             </div>
-            {% if product.metafields.description.details %}
+            {% if product.metafields.description.details-eu or product.metafields.description.details-us %}
               <div class="tab">
                 {{ 'customisations.product_page_tabs.details_tab' | t }}
               </div>
@@ -306,9 +306,10 @@
             <div id="Description" class="content-body show-active">
               {{ product.description }}
             </div>
-            {% if product.metafields.description.details %}
+            {% if product.metafields.description.details-eu or product.metafields.description.details-us %}
               <div id="Details" class="content-body">
-                {{ product.metafields.description.details }}
+                {{ product.metafields.description.details-us }}
+                {{ product.metafields.description.details-eu }}
               </div>
             {% endif %}
             <div id="Shipping" class="content-body">
